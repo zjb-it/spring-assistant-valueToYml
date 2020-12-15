@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.6.5'
+}
+
+group 'com.github.zjb-it'
+version '1.0'
+
+repositories {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2020.2.3'
+    plugins = ['java','yaml']
+
+}
+patchPluginXml {
+    changeNotes """
+      """
+}

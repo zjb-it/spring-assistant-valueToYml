@@ -1,0 +1,23 @@
+<idea-plugin>
+    <id>com.github.zjb-it</id>
+    <name>spring-assistant-@valueToYml</name>
+    <vendor email="zjbhnay@163.com" url="https://github.com/zjb-it">ZhaoJingBo</vendor>
+
+    <description><![CDATA[
+<strong>spring assistant, (ctrl + left mouse) on the annotation(org.springframework.beans.factory.annotation.Value) will to yml</strong>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <gotoDeclarationHandler implementation="com.github.zjb.GotoYmlFile"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
