@@ -4,7 +4,9 @@
     <vendor email="zjbhnay@163.com" url="https://github.com/zjb-it">ZhaoJingBo</vendor>
 
     <description><![CDATA[
-<strong>spring assistant, (ctrl + left mouse) on the annotation(org.springframework.beans.factory.annotation.Value) will to yml</strong>
+<p><strong>spring assistant, (ctrl + left mouse) on the annotation(org.springframework.beans.factory.annotation.Value) will to yml</strong><p>
+<p><img src="https://github.com/zjb-it/spring-assistant--valueToYml/blob/master/Screenshot/detail.gif?raw=true"></p>
+
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
