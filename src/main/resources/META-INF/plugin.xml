@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.github.zjb-it</id>
+    <id>spring-assistant-@valueToYml</id>
     <name>spring-assistant-@valueToYml</name>
     <vendor email="zjbhnay@163.com" url="https://github.com/zjb-it">ZhaoJingBo</vendor>
 

@@ -42,10 +42,12 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             return new PsiElement[0];
         }
 
-        PsiField psiField = PsiTreeUtil.getParentOfType(sourceElement, PsiField.class);
-        if (Objects.isNull(psiField) || !psiField.hasAnnotation(VALUE_QUALIFIED_NAME)) {
+        PsiAnnotation psiAnnotation = PsiTreeUtil.getParentOfType(sourceElement, PsiAnnotation.class);
+        if (Objects.isNull(psiAnnotation) || !Objects.equals(psiAnnotation.getQualifiedName(),VALUE_QUALIFIED_NAME)) {
             return new PsiElement[0];
         }
+        String key = psiAnnotation.findAttributeValue("value").getText();
+        key = key.substring(key.indexOf("{") + 1, key.indexOf("}"));
 
         Project project = sourceElement.getProject();
         Collection<VirtualFile> files = FileTypeIndex.getFiles(YAMLFileType.YML, GlobalSearchScope.projectScope(project));
@@ -53,8 +55,6 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             return new PsiElement[0];
         }
 
-        String key = psiField.getAnnotation(VALUE_QUALIFIED_NAME).findAttributeValue("value").getText();
-        key = key.substring(key.indexOf("{") + 1, key.indexOf("}"));
         List<PsiElement> result = new ArrayList<>(files.size());
         for (VirtualFile file : files) {
             Pair<PsiElement, String> value = YAMLUtil.getValue((YAMLFile) PsiManager.getInstance(sourceElement.getProject()).findFile(file), key.split("\\."));
