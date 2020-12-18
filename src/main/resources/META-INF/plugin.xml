@@ -4,9 +4,51 @@
     <vendor email="zjbhnay@163.com" url="https://github.com/zjb-it">ZhaoJingBo</vendor>
 
     <description><![CDATA[
-<p><strong>spring assistant, (ctrl + left mouse) on the annotation(org.springframework.beans.factory.annotation.Value) will to yml</strong><p>
-<p><img src="https://github.com/zjb-it/spring-assistant--valueToYml/blob/master/Screenshot/detail.gif?raw=true"></p>
 
+<head>
+    <title>spring-assistant-@valueToYml</title>
+</head>
+<body>
+
+<h1>spring assistant, (ctrl + left mouse) on the annotation(org.springframework.beans.factory.annotation.Value) will to yml</h1>
+
+<h2>Install</h2>
+<ul>
+    <li><p>Using IDE built-in plugin system on Windows:</p>
+        <ul>
+            <li><kbd>File</kbd> &gt; <kbd>Settings</kbd> &gt; <kbd>Plugins</kbd> &gt; <kbd>Browse repositories...</kbd>
+                &gt; <kbd>Search for &quot;valueToYml&quot;</kbd> &gt; <kbd>Install Plugin</kbd></li>
+
+        </ul>
+    </li>
+    <li><p>Using IDE built-in plugin system on MacOs:</p>
+        <ul>
+            <li><kbd>Preferences</kbd> &gt; <kbd>Settings</kbd> &gt; <kbd>Plugins</kbd> &gt; <kbd>Browse
+                repositories...</kbd> &gt; <kbd>Search for &quot;valueToYml&quot;</kbd> &gt; <kbd>Install
+                Plugin</kbd></li>
+
+        </ul>
+    </li>
+    <li><p>Manually:</p>
+        <ul>
+            <li>Download the <a href='https://plugins.jetbrains.com/plugin/15574-spring-assistant-valuetoyml/versions'>latest release</a> and
+                install it manually using <kbd>Preferences</kbd> &gt; <kbd>Plugins</kbd> &gt; <kbd>Install plugin from
+                    disk...</kbd></li>
+            <!--            <li>From official jetbrains store from <a href='https://plugins.jetbrains.com/plugin/14949-gsonformatplus/'>download</a></li>-->
+
+        </ul>
+    </li>
+
+</ul>
+<p>Restart IDE.</p>
+
+    <h2>Usages</h2>
+    <p>(ctrl + left mouse) on the annotation  of org.springframework.beans.factory.annotation.Value </p>
+    <ul>
+        <p><img src="https://github.com/zjb-it/spring-assistant--valueToYml/blob/master/Screenshot/detail.gif?raw=true"></p>
+    </ul>>
+
+</body>
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
