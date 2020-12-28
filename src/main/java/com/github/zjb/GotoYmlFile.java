@@ -1,5 +1,6 @@
 package com.github.zjb;
 
+import com.github.zjb.util.EnumUtil;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.module.Module;
@@ -29,8 +30,6 @@ import java.util.*;
 
 public class GotoYmlFile implements GotoDeclarationHandler {
 
-    private static final String VALUE_QUALIFIED_NAME = "org.springframework.beans.factory.annotation.Value";
-
     @Nullable
     @Override
     public PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
@@ -43,12 +42,11 @@ public class GotoYmlFile implements GotoDeclarationHandler {
         }
 
         PsiAnnotation psiAnnotation = PsiTreeUtil.getParentOfType(sourceElement, PsiAnnotation.class);
-        if (Objects.isNull(psiAnnotation) || !Objects.equals(psiAnnotation.getQualifiedName(),VALUE_QUALIFIED_NAME)) {
+        if (!EnumUtil.containAnnotation(psiAnnotation)) {
             return new PsiElement[0];
         }
-        String key = psiAnnotation.findAttributeValue("value").getText();
+        String key = sourceElement.getText();
         key = key.substring(key.indexOf("{") + 1, key.indexOf("}"));
-
         Project project = sourceElement.getProject();
         Collection<VirtualFile> files = FileTypeIndex.getFiles(YAMLFileType.YML, GlobalSearchScope.projectScope(project));
         if (CollectionUtils.isEmpty(files)) {

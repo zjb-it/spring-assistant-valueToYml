@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.zjb-it'
-version '3.0'
+version '4.0'
 
 repositories {
     repositories {
@@ -26,6 +26,6 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-fix bug : Field have another Annotation that not org.springframework.beans.factory.annotation.Value ,but still vaild
+
       """
 }

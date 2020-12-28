@@ -50,6 +50,21 @@
 
 </body>
     ]]></description>
+    <change-notes><![CDATA[
+        <h2>4.0</h2>
+            <ul>
+                <li><p>support org.springframework.cloud.openfeign.FeignClient#url</p></li>
+                <li><p>support org.apache.rocketmq.spring.annotation.RocketMQMessageListener#topic</p></li>
+                <li><p>support org.springframework.kafka.annotation.KafkaListener#topics</p></li>
+                <li><p>support org.springframework.kafka.annotation.KafkaListener#groupId</p></li>
+            </ul>
+
+        <h2>3.0</h2>
+            <p>add description</p>
+        <h2>2.0</h2>
+            <p>fix bug : Field have another Annotation that not org.springframework.beans.factory.annotation.Value ,but still vaild</p>
+
+   ]]> </change-notes>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
