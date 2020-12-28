@@ -24,8 +24,8 @@ intellij {
     plugins = ['java','yaml']
 
 }
-patchPluginXml {
-    changeNotes """
-
-      """
-}
+//patchPluginXml {
+//    changeNotes """
+//
+//      """
+//}
