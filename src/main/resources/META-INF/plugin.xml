@@ -51,6 +51,10 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
+        <h2>5.0</h2>
+            <p>support yml go to java (ctrl+left mouse)</p>
+            <p>ctrl+left mouse 支持从yml文件到java文件</p>
+
         <h2>4.0</h2>
             <ul>
                 <li><p>support org.springframework.cloud.openfeign.FeignClient#url</p></li>
