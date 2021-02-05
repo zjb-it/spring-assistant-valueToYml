@@ -51,6 +51,13 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
+        <h2>7.0</h2>
+            <p>fix bug:  This plugin cannot work When Annotation's AttributeValue is Array，</p>
+            <p>解决bug：注解的属性是数组，插件不起作用</p>
+
+        <h2>6.0</h2>
+            <p>support idea 2020.3.2</p>
+            <p>支持 idea 2020.3.2</p>
         <h2>5.0</h2>
             <p>support yml go to java (ctrl+left mouse)</p>
             <p>ctrl+left mouse 支持从yml文件到java文件</p>

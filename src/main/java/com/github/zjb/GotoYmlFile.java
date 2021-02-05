@@ -4,8 +4,10 @@ import com.github.zjb.util.EnumUtil;
 import com.google.common.collect.Lists;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.ide.highlighter.JavaFileType;
+import com.intellij.lang.jvm.annotation.JvmAnnotationArrayValue;
 import com.intellij.lang.jvm.annotation.JvmAnnotationAttribute;
 import com.intellij.lang.jvm.annotation.JvmAnnotationAttributeValue;
+import com.intellij.lang.jvm.annotation.JvmAnnotationConstantValue;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
@@ -80,20 +82,39 @@ public class GotoYmlFile implements GotoDeclarationHandler {
                 }
                 PsiNameValuePair[] attributes1 = psiAnnotation.getParameterList().getAttributes();
                 for (PsiNameValuePair psiNameValuePair : attributes1) {
-                    String literalValue = psiNameValuePair.getLiteralValue();
-                    if (StringUtils.isBlank(literalValue)) {
-                        continue;
-                    }
-
-                    String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
-                    if (Objects.equals(valueKey, configFullName)) {
+                    JvmAnnotationAttributeValue attributeValue = psiNameValuePair.getAttributeValue();
+                    if (checkEquals(configFullName, attributeValue)) {
                         result.add(psiAnnotation);
+                        //有一个相等就不匹配其它的了
+                        break;
                     }
                 }
             }
         }
         return result.toArray(new PsiElement[result.size()]);
     }
+
+    private Boolean checkEquals(String configFullName, JvmAnnotationAttributeValue constantValue) {
+        if (constantValue instanceof JvmAnnotationConstantValue) {
+            String literalValue = ((JvmAnnotationConstantValue) constantValue).getConstantValue().toString();
+            String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
+            return Objects.equals(valueKey, configFullName);
+        }
+        if (constantValue instanceof JvmAnnotationArrayValue) {
+            JvmAnnotationArrayValue attributeValue1 = (JvmAnnotationArrayValue) constantValue;
+            List<JvmAnnotationAttributeValue> annotationArrayValues = attributeValue1.getValues();
+            for (JvmAnnotationAttributeValue value : annotationArrayValues) {
+                //递归
+                if (checkEquals(configFullName, value)) {
+                    return true;
+                }
+                //不相等，匹配下一个
+                continue;
+            }
+        }
+        return false;
+    }
+
 
     private PsiElement[] javaGoToYml(@NotNull PsiElement sourceElement) {
         IElementType tokenType = ((PsiJavaToken) sourceElement).getTokenType();
@@ -106,7 +127,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             return new PsiElement[0];
         }
         String key = sourceElement.getText();
-        key = key.substring(key.indexOf("{") + 1, key.indexOf("}"));
+        key = key.substring(key.indexOf("${") + 2, key.indexOf("}"));
         Project project = sourceElement.getProject();
         Collection<VirtualFile> files = FileTypeIndex.getFiles(YAMLFileType.YML, GlobalSearchScope.projectScope(project));
         if (CollectionUtils.isEmpty(files)) {
