@@ -35,6 +35,7 @@ import org.jetbrains.yaml.psi.YAMLPsiElement;
 import org.jetbrains.yaml.psi.impl.YAMLPlainTextImpl;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zhaojingbo(zjbhnay @ 163.com)
@@ -70,6 +71,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             return DEFAULT_RESULT;
         }
         ArrayList<PsiElement> result = Lists.newArrayList();
+//        List<VirtualFile> collect = files.stream().filter(file -> file.getName().equals("ConfigApplication.java")).collect(Collectors.toList());
         for (VirtualFile file : files) {
             Collection<PsiAnnotation> childrenOfType = PsiTreeUtil.findChildrenOfType(PsiManager.getInstance(project).findFile(file), PsiAnnotation.class);
             if (CollectionUtils.isEmpty(childrenOfType)) {
@@ -97,6 +99,9 @@ public class GotoYmlFile implements GotoDeclarationHandler {
     private Boolean checkEquals(String configFullName, JvmAnnotationAttributeValue constantValue) {
         if (constantValue instanceof JvmAnnotationConstantValue) {
             String literalValue = ((JvmAnnotationConstantValue) constantValue).getConstantValue().toString();
+            if (!literalValue.startsWith("$")){
+                return false;
+            }
             String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
             return Objects.equals(valueKey, configFullName);
         }
