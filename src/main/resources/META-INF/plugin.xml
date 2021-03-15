@@ -51,6 +51,10 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
+
+        <h2>8.0</h2>
+            <p>fix bug:  This plugin cannot work When Annotation's AttributeValue is constant，</p>
+            <p>解决bug：注解的属性是常量，插件不起作用</p>
         <h2>7.0</h2>
             <p>fix bug:  This plugin cannot work When Annotation's AttributeValue is Array，</p>
             <p>解决bug：注解的属性是数组，插件不起作用</p>
