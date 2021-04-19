@@ -52,6 +52,9 @@
     ]]></description>
     <change-notes><![CDATA[
 
+        <h2>9.0</h2>
+            <p>升级2021.1</p>
+
         <h2>8.0</h2>
             <p>fix bug:  This plugin cannot work When Annotation's AttributeValue is constant，</p>
             <p>解决bug：注解的属性是常量，插件不起作用</p>
