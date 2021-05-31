@@ -5,7 +5,6 @@ plugins {
 
 group 'com.github.zjb-it'
 version '9.0'
-
 repositories {
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }

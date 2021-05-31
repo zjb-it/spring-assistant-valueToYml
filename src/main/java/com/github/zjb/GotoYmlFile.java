@@ -79,7 +79,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
                     JvmAnnotationAttributeValue attributeValue = psiNameValuePair.getAttributeValue();
                     if (checkEquals(configFullName, attributeValue)) {
                         result.add(psiAnnotation);
-                        //æœ‰ä¸€ä¸ªç›¸ç­‰å°±ä¸åŒ¹é…å…¶å®ƒçš„äº†
+                        //ÓĞÒ»¸öÏàµÈ¾Í²»Æ¥ÅäÆäËüµÄÁË
                         break;
                     }
                 }
@@ -101,11 +101,11 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             JvmAnnotationArrayValue attributeValue1 = (JvmAnnotationArrayValue) constantValue;
             List<JvmAnnotationAttributeValue> annotationArrayValues = attributeValue1.getValues();
             for (JvmAnnotationAttributeValue value : annotationArrayValues) {
-                //é€’å½’
+                //µİ¹é
                 if (checkEquals(configFullName, value)) {
                     return true;
                 }
-                //ä¸ç›¸ç­‰ï¼ŒåŒ¹é…ä¸‹ä¸€ä¸ª
+                //²»ÏàµÈ£¬Æ¥ÅäÏÂÒ»¸ö
                 continue;
             }
         }
@@ -114,7 +114,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
 
     private String getValueKey(String literalValue) {
         String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
-        //å¸¦æœ‰é»˜è®¤å€¼çš„æ³¨è§£çš„è§£æï¼Œæ¯”å¦‚@Value("${a.b.c:123}")
+        //´øÓĞÄ¬ÈÏÖµµÄ×¢½âµÄ½âÎö£¬±ÈÈç@Value("${a.b.c:123}")
         if(valueKey.contains(DEFAULT_SPLIT)){
             valueKey = valueKey.split(DEFAULT_SPLIT)[0];
         }
@@ -133,7 +133,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             return new PsiElement[0];
         }
         String key = sourceElement.getText();
-        key = key.substring(key.indexOf("${") + 2, key.indexOf("}"));
+        key = getValueKey(key);
         Project project = sourceElement.getProject();
         Collection<VirtualFile> files = FileTypeIndex.getFiles(YAMLFileType.YML, GlobalSearchScope.projectScope(project));
         if (CollectionUtils.isEmpty(files)) {
