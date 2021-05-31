@@ -102,7 +102,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             if (!literalValue.startsWith("$")){
                 return false;
             }
-            String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
+            String valueKey = getValueKey(literalValue);
             return Objects.equals(valueKey, configFullName);
         }
         if (constantValue instanceof JvmAnnotationArrayValue) {
@@ -118,6 +118,15 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             }
         }
         return false;
+    }
+
+    private String getValueKey(String literalValue) {
+        String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
+        //带有默认值的注解的解析，比如@Value("${a.b.c:123}")
+        if(valueKey.constains(":")){
+            valueKey = valueKey.split(":").get(0);
+        }
+        return valueKey;
     }
 
 
