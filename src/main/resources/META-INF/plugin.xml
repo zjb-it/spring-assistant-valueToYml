@@ -51,6 +51,8 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
+        <h2>11.0</h2>
+            <p>修复带默认值的注解解析失败</p>
         <h2>10.0</h2>
             <p>修复npe bug</p>
         <h2>9.0</h2>

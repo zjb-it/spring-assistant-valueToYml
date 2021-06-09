@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.zjb-it'
-version '10.0'
+version '11.0'
 
 repositories {
     repositories {
