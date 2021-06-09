@@ -51,7 +51,8 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
-
+        <h2>10.0</h2>
+            <p>修复npe bug</p>
         <h2>9.0</h2>
             <p>升级2021.1</p>
 

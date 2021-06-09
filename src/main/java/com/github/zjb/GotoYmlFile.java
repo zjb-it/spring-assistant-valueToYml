@@ -128,6 +128,9 @@ public class GotoYmlFile implements GotoDeclarationHandler {
         }
 
         PsiAnnotation psiAnnotation = PsiTreeUtil.getParentOfType(sourceElement, PsiAnnotation.class);
+        if (Objects.isNull(psiAnnotation)) {
+            return new PsiElement[0];
+        }
         if (!EnumUtil.containAnnotation(psiAnnotation)) {
             return new PsiElement[0];
         }
