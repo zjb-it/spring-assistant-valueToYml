@@ -37,6 +37,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
 
     private static final PsiElement[] DEFAULT_RESULT = new PsiElement[0];
     public static final String DEFAULT_SPLIT = ":";
+    public static final String DOLLAR = "$";
 
 
     @Nullable
@@ -91,7 +92,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
     private Boolean checkEquals(String configFullName, JvmAnnotationAttributeValue constantValue) {
         if (constantValue instanceof JvmAnnotationConstantValue) {
             String literalValue = ((JvmAnnotationConstantValue) constantValue).getConstantValue().toString();
-            if (!literalValue.startsWith("$")){
+            if (!literalValue.startsWith(DOLLAR)){
                 return false;
             }
             String valueKey = getValueKey(literalValue);
@@ -133,6 +134,9 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             return new PsiElement[0];
         }
         String key = sourceElement.getText();
+        if (!key.startsWith(DOLLAR)){
+            return new PsiElement[0];
+        }
         key = getValueKey(key);
         Project project = sourceElement.getProject();
         Collection<VirtualFile> files = FileTypeIndex.getFiles(YAMLFileType.YML, GlobalSearchScope.projectScope(project));
