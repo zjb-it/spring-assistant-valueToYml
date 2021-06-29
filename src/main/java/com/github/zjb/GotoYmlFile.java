@@ -80,7 +80,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
                     JvmAnnotationAttributeValue attributeValue = psiNameValuePair.getAttributeValue();
                     if (checkEquals(configFullName, attributeValue)) {
                         result.add(psiAnnotation);
-                      //æœ‰ä¸€ä¸ªç›¸ç­‰å°±ä¸åŒ¹é…å…¶å®ƒçš„äº†
+                      //ÓĞÒ»¸öÏàµÈ¾Í²»Æ¥ÅäÆäËüµÄÁË
                         break;
                     }
                 }
@@ -112,7 +112,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
 
     private String getValueKey(String literalValue) {
         String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
-        //å¸¦æœ‰é»˜è®¤å€¼çš„æ³¨è§£çš„è§£æï¼Œæ¯”å¦‚@Value("${a.b.c:123}")
+        //´øÓĞÄ¬ÈÏÖµµÄ×¢½âµÄ½âÎö£¬±ÈÈç@Value("${a.b.c:123}")
         if(valueKey.contains(DEFAULT_SPLIT)){
             valueKey = valueKey.split(DEFAULT_SPLIT)[0];
         }
@@ -134,7 +134,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             return new PsiElement[0];
         }
         String key = sourceElement.getText();
-        if (!key.startsWith(DOLLAR)){
+        if (!key.contains(DOLLAR)){
             return new PsiElement[0];
         }
         key = getValueKey(key);
