@@ -46,11 +46,15 @@
     <p>(ctrl + left mouse) on the annotation  of org.springframework.beans.factory.annotation.Value </p>
     <ul>
         <p><img src="https://github.com/zjb-it/spring-assistant--valueToYml/blob/master/Screenshot/detail.gif?raw=true"></p>
-    </ul>>
+    </ul>
 
 </body>
     ]]></description>
     <change-notes><![CDATA[
+        <h2>13.1</h2>
+            <p>增加Scheduled</p>
+            <p>修复bug</p>
+            <p>添加平台支持</p>
         <h2>13.0</h2>
             <p>升级2021.2</p>
         <h2>12.0</h2>

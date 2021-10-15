@@ -1,7 +1,6 @@
 package com.github.zjb.util;
 
 import com.github.zjb.enums.AnnotationEnum;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.intellij.psi.PsiAnnotation;
 

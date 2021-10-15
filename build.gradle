@@ -4,11 +4,11 @@ plugins {
 }
 
 group 'com.github.zjb-it'
-version '13.0'
+version '13.1'
 
 repositories {
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         mavenLocal()
         mavenCentral()
     }
@@ -24,8 +24,10 @@ intellij {
     plugins = ['java','yaml']
 
 }
-//patchPluginXml {
+patchPluginXml {
 //    changeNotes """
-//
 //      """
-//}
+
+    sinceBuild = "145.258"
+    untilBuild = null
+}
