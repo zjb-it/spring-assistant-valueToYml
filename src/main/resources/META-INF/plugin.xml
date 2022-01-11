@@ -51,6 +51,11 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
+        <h2>2021.3.1</h2>
+            <p>升级2021.3.1</p>
+            <p>支持的注解改为可配置的，配置地址 Settings -> Tools -> ValueToYml</p>
+        <h2>2021.3</h2>
+            <p>升级2021.3</p>
         <h2>13.0</h2>
             <p>升级2021.2</p>
         <h2>12.0</h2>
@@ -99,7 +104,15 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <gotoDeclarationHandler implementation="com.github.zjb.GotoYmlFile"/>
+        <applicationService serviceImplementation="com.github.zjb.setting.AppSettingsState"/>
+
+        <applicationConfigurable parentId="tools" instance="com.github.zjb.setting.AppSettingsConfigurable"
+                                 id="org.intellij.sdk.settings.AppSettingsConfigurable"
+                                 displayName="ValueToYml"/>
+
     </extensions>
+
+
 
     <actions>
         <!-- Add your actions here -->

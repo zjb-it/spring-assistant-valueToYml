@@ -4,7 +4,8 @@ plugins {
 }
 
 group 'com.github.zjb-it'
-version '13.0'
+//version '2021.3.1-1'
+version '2021.3.1'
 
 repositories {
     repositories {
@@ -20,7 +21,8 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2021.2'
+//    version '2021.2.1'
+    version '2021.3.1'
     plugins = ['java','yaml']
 
 }
