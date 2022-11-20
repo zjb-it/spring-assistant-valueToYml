@@ -116,9 +116,9 @@ public class GotoYmlFile implements GotoDeclarationHandler {
     }
 
     private String getValueKey(String literalValue) {
-//        if (!literalValue.contains("${")) {
-//            return literalValue;
-//        }
+        if (!literalValue.contains("${")) {
+            return literalValue;
+        }
         String valueKey = literalValue.substring(literalValue.indexOf("${") + 2, literalValue.indexOf("}"));
         //带有默认值的注解的解析，比如@Value("${a.b.c:123}")
         if (valueKey.contains(DEFAULT_SPLIT)) {

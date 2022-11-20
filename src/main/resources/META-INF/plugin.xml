@@ -52,6 +52,8 @@
     ]]></description>
     <change-notes><![CDATA[
         <h2>2021.3.1</h2>
+            <p>去除版本限制（untilBuild=null）</p>
+        <h2>2021.3.1</h2>
             <p>升级2021.3.1</p>
             <p>支持的注解改为可配置的，配置地址 Settings -> Tools -> ValueToYml</p>
         <h2>2021.3</h2>

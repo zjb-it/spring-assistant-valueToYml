@@ -5,7 +5,7 @@ plugins {
 
 group 'com.github.zjb-it'
 //version '2021.3.1-1'
-version '2021.3.1'
+version 'final'
 
 repositories {
     repositories {
@@ -26,8 +26,15 @@ intellij {
     plugins = ['java','yaml']
 
 }
-//patchPluginXml {
-//    changeNotes """
-//
-//      """
-//}
+patchPluginXml {
+    untilBuild ""
+}
+
+runIde{
+    intellij{
+        autoReloadPlugins false
+        }
+    jvmArgs ""
+}
+
+//加个挂件的需求，不需要Ctrl+click就能跳过去，类似 Controller 中的Requestmapping
