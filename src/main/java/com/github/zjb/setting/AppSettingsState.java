@@ -23,6 +23,7 @@ public class AppSettingsState implements PersistentStateComponent<AppSettingsSta
     }
 
     public List<Object> ANNOTATIONS = Lists.newArrayList("org.apache.rocketmq.spring.annotation.RocketMQMessageListener", "org.springframework.kafka.annotation.KafkaListener", "org.springframework.cloud.openfeign.FeignClient", "org.springframework.beans.factory.annotation.Value");
+    public boolean hintCheckbox = true;
 
 
     @Nullable

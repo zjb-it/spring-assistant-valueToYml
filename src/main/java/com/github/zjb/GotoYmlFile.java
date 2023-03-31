@@ -1,18 +1,15 @@
 package com.github.zjb;
 
 import com.github.zjb.setting.AppSettingsState;
-import com.github.zjb.util.EnumUtil;
 import com.google.common.collect.Lists;
 import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.ide.highlighter.JavaFileType;
-import com.intellij.idea.IdeaLogger;
 import com.intellij.lang.jvm.annotation.JvmAnnotationArrayValue;
 import com.intellij.lang.jvm.annotation.JvmAnnotationAttributeValue;
 import com.intellij.lang.jvm.annotation.JvmAnnotationConstantValue;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
@@ -31,7 +28,10 @@ import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YAMLPsiElement;
 import org.jetbrains.yaml.psi.impl.YAMLPlainTextImpl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -77,7 +77,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
             }
 
             for (PsiAnnotation psiAnnotation : childrenOfType) {
-                if (!EnumUtil.containAnnotation(psiAnnotation)) {
+                if (!AppSettingsState.getInstance().ANNOTATIONS.contains(psiAnnotation.getQualifiedName())){
                     continue;
                 }
                 PsiNameValuePair[] attributes1 = psiAnnotation.getParameterList().getAttributes();
@@ -115,7 +115,7 @@ public class GotoYmlFile implements GotoDeclarationHandler {
         return false;
     }
 
-    private String getValueKey(String literalValue) {
+    public static String getValueKey(String literalValue) {
         if (!literalValue.contains("${")) {
             return literalValue;
         }
@@ -148,10 +148,15 @@ public class GotoYmlFile implements GotoDeclarationHandler {
 //            return new PsiElement[0];
 //        }
 
+        return getYmlPsiElements(sourceElement);
+    }
+
+    @NotNull
+    public static PsiElement[] getYmlPsiElements(@NotNull PsiElement sourceElement) {
         Project project = sourceElement.getProject();
         Collection<VirtualFile> files = FileTypeIndex.getFiles(YAMLFileType.YML, GlobalSearchScope.projectScope(project));
 
-        LOG.info(CollectionUtils.isEmpty(files) + " yml文件是否这空");
+        LOG.info(CollectionUtils.isEmpty(files) + " yml文件是否为空");
         LOG.info(files.stream().map(VirtualFile::getName).collect(Collectors.joining()) + "yml文件名称");
 
         if (CollectionUtils.isEmpty(files)) {
@@ -162,19 +167,12 @@ public class GotoYmlFile implements GotoDeclarationHandler {
         key = getValueKey(key);
         List<PsiElement> result = new ArrayList<>(files.size());
         for (VirtualFile file : files) {
-
-            YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) PsiManager.getInstance(sourceElement.getProject()).findFile(file), key.split("\\."));
+            YAMLKeyValue qualifiedKeyInFile = YAMLUtil.getQualifiedKeyInFile((YAMLFile) PsiManager.getInstance(project).findFile(file), key.split("\\."));
             if (Objects.nonNull(qualifiedKeyInFile)){
                 result.add(qualifiedKeyInFile);
             }
-
-//            Pair<PsiElement, String> value = YAMLUtil.getValue((YAMLFile) PsiManager.getInstance(sourceElement.getProject()).findFile(file), key.replace("\"", "").split("\\."));
-//            if (Objects.nonNull(value)) {
-//                result.add(value.getFirst());
-//            }
         }
         return result.toArray(new PsiElement[result.size()]);
     }
-
 
 }

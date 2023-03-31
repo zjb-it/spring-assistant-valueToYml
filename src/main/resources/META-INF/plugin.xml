@@ -111,9 +111,14 @@
         <applicationConfigurable parentId="tools" instance="com.github.zjb.setting.AppSettingsConfigurable"
                                  id="org.intellij.sdk.settings.AppSettingsConfigurable"
                                  displayName="ValueToYml"/>
+<!--        <codeInsight.inlayProvider id="com.github.zjb.ValueInnerHit" language="JAVA"-->
+<!--                                   implementationClass="com.github.zjb.ValueInnerHit"></codeInsight.inlayProvider>-->
+<!--        <codeInsight.parameterNameHints language="JAVA" implementationClass="com.github.zjb.ValueInlay"/>-->
 
     </extensions>
-
+   <projectListeners>
+       <listener class="com.github.zjb.YmlInlineInlay" topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+   </projectListeners>
 
 
     <actions>
