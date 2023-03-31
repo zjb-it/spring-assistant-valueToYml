@@ -5,7 +5,7 @@ plugins {
 
 group 'com.github.zjb-it'
 //version '2021.3.1-1'
-version 'final'
+version '2022.3.3'
 
 repositories {
     repositories {
@@ -29,7 +29,7 @@ intellij {
 
 }
 patchPluginXml {
-//    untilBuild ""
+    untilBuild = ""
 }
 
 runIde{
