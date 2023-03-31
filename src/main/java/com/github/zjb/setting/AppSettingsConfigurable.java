@@ -2,18 +2,9 @@ package com.github.zjb.setting;
 
 import com.github.zjb.form.Settings;
 import com.google.common.collect.Lists;
-import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.file.impl.FileManager;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.notebooks.visualization.r.inlays.EditorInlaysManager;
 
 import javax.swing.*;
 import java.util.ArrayList;

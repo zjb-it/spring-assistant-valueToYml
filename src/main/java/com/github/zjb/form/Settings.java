@@ -43,12 +43,8 @@ public class Settings {
         Vector<Vector<Object>> data = this.getData(annotations);
         defaultTableModel = new DefaultTableModel(data, columnNames);
         qualifiedNameTablePanel = ToolbarDecorator.createDecorator(new JBTable(defaultTableModel))
-                .setAddAction(anActionButton -> {
-                    defaultTableModel.addRow(new String[]{});
-
-                }).setRemoveAction(anActionButton -> {
-                    defaultTableModel.removeRow(((JBTable) anActionButton.getContextComponent()).getSelectedRow());
-                })
+                .setAddAction(anActionButton -> defaultTableModel.addRow(new String[]{}))
+                .setRemoveAction(anActionButton -> defaultTableModel.removeRow(((JBTable) anActionButton.getContextComponent()).getSelectedRow()))
                 .createPanel();
     }
 

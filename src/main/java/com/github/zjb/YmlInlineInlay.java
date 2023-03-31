@@ -2,6 +2,7 @@ package com.github.zjb;
 
 import com.github.zjb.setting.AppSettingsState;
 import com.intellij.codeInsight.daemon.impl.HintRenderer;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.InlayModel;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -16,8 +17,12 @@ import org.apache.commons.collections.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class YmlInlineInlay implements FileEditorManagerListener {
+
+    private static final Logger LOG = Logger.getInstance(YmlInlineInlay.class);
+
     @Override
     public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
 
@@ -32,6 +37,9 @@ public class YmlInlineInlay implements FileEditorManagerListener {
                 if (CollectionUtils.isNotEmpty(psiElements)) {
                     Editor editor = source.getSelectedTextEditor();
                     InlayModel inlayModel = editor.getInlayModel();
+                    if (Objects.isNull(inlayModel)) {
+                        return;
+                    }
                     psiElements.forEach(element -> {
                         if (AppSettingsState.getInstance().ANNOTATIONS.contains(element.getQualifiedName())) {
                             @NotNull PsiElement[] ymlPsiElements = GotoYmlFile.getYmlPsiElements(PsiTreeUtil.findChildOfType(element, PsiLiteralExpression.class));
@@ -44,7 +52,7 @@ public class YmlInlineInlay implements FileEditorManagerListener {
             });
 
         } catch (PsiInvalidElementAccessException e) {
-            System.out.println(e);
+            LOG.error(e);
         }
     }
 
