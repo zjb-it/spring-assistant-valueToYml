@@ -51,6 +51,9 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
+        <h2>2022.3.3-1</h2>
+            <p>优化显示inlay hint</p>
+            <p> Optimize show inlay hint</p>
         <h2>2022.3.3</h2>
             <p>注解对应的值可以显示为inlay hint</p>
             <p>增加inlay hint显示开关，默认显示</p>
@@ -114,10 +117,14 @@
         <applicationConfigurable parentId="tools" instance="com.github.zjb.setting.AppSettingsConfigurable"
                                  id="org.intellij.sdk.settings.AppSettingsConfigurable"
                                  displayName="ValueToYml"/>
+<!--        <backgroundPostStartupActivity implementation="com.github.zjb.TestAction1"/>-->
     </extensions>
    <projectListeners>
-       <listener class="com.github.zjb.YmlInlineInlay" topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+       <listener class="com.github.zjb.YmlInlineInlay" topic="com.intellij.codeInsight.daemon.impl.EditorTrackerListener"/>
    </projectListeners>
+    <applicationListeners>
+        <listener class="com.github.zjb.YmlInlineInlay" topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"></listener>
+    </applicationListeners>
 
     <actions>
         <!-- Add your actions here -->
