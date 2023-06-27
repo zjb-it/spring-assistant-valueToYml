@@ -85,7 +85,6 @@ public class GotoYmlFile implements GotoDeclarationHandler {
                     JvmAnnotationAttributeValue attributeValue = psiNameValuePair.getAttributeValue();
                     if (checkEquals(configFullName, attributeValue)) {
                         result.add(psiAnnotation);
-                        //有一个相等就不匹配其它的了
                         break;
                     }
                 }

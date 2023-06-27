@@ -51,6 +51,12 @@
 </body>
     ]]></description>
     <change-notes><![CDATA[
+
+    <h2>2023.1.3</h2>
+            <p>升级2023.1.3</p>
+     <h2>2022.3.3-2</h2>
+            <p>修复bug</p>
+            <p> fix bug</p>
         <h2>2022.3.3-1</h2>
             <p>优化显示inlay hint</p>
             <p> Optimize show inlay hint</p>
