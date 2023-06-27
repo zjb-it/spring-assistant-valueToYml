@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Vector;
 
@@ -18,7 +20,7 @@ public class Settings {
     private JPanel configPanel;
     private JPanel donatePanel;
     private JCheckBox hintCheckBox;
-    private JLabel donateLabel;
+    private JButton donateBtn;
 
     private DefaultTableModel defaultTableModel;
 
@@ -33,8 +35,20 @@ public class Settings {
 
     public Settings() {
         AppSettingsState settingsState = AppSettingsState.getInstance();
-        donateLabel.setIcon(IconLoader.getIcon("/icons/support.svg", Settings.class.getClassLoader()));
+        donateBtn.setIcon(IconLoader.getIcon("/icons/support.svg", Settings.class.getClassLoader()));
         hintCheckBox.addChangeListener(e -> settingsState.hintCheckbox = hintCheckBox.isSelected());
+
+        donateBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    Donate dialog = new Donate();
+                    dialog.pack();
+                    dialog.setVisible(true);
+                }
+                super.mousePressed(e);
+            }
+        });
     }
 
     private void createUIComponents() {

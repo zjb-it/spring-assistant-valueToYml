@@ -50,6 +50,9 @@ public class YmlInlineInlay implements BulkFileListener, EditorTrackerListener {
     public void after(@NotNull List<? extends @NotNull VFileEvent> events) {
         for (VFileEvent event : events) {
             VirtualFile file = event.getFile();
+            if (!file.isValid()) {
+                continue;
+            }
             if (file.getFileType() instanceof YAMLFileType || file.getFileType() instanceof JavaFileType) {
                 Project project = ProjectLocator.getInstance().guessProjectForFile(file);
                 List<? extends Editor> activeEditors = EditorTracker.getInstance(project).getActiveEditors();
@@ -66,6 +69,9 @@ public class YmlInlineInlay implements BulkFileListener, EditorTrackerListener {
     public void activeEditorsChanged(@NotNull List<? extends Editor> activeEditors) {
         for (Editor editor : activeEditors) {
             VirtualFile file = FileDocumentManager.getInstance().getFile(editor.getDocument());
+            if (!file.isValid()) {
+                continue;
+            }
             try {
                 Project project = editor.getProject();
                 showInlay(editor, file, project);
@@ -77,29 +83,36 @@ public class YmlInlineInlay implements BulkFileListener, EditorTrackerListener {
 
     private static void showInlay(Editor editor, VirtualFile file, Project project) {
         DumbService.getInstance(project).smartInvokeLater(() -> {
-            PsiFile psiFile = PsiUtilCore.getPsiFile(project, file);
-            if (!(psiFile.getFileType() instanceof JavaFileType)) {
-                return;
-            }
-
-            Collection<PsiAnnotation> psiElements = PsiTreeUtil.findChildrenOfAnyType(psiFile, PsiAnnotation.class);
-            if (CollectionUtils.isEmpty(psiElements)) {
-                return;
-            }
-            InlayModel inlayModel = editor.getInlayModel();
-            if (Objects.isNull(inlayModel)) {
-                return;
-            }
-            psiElements.forEach(element -> {
-                if (AppSettingsState.getInstance().ANNOTATIONS.contains(element.getQualifiedName())) {
-                    TextRange textRange = element.getTextRange();
-                    inlayModel.getInlineElementsInRange(textRange.getStartOffset(), textRange.getEndOffset(), HintRenderer.class).forEach(Inlay::dispose);
-                    @NotNull PsiElement[] ymlPsiElements = GotoYmlFile.getYmlPsiElements(PsiTreeUtil.findChildOfType(element, PsiLiteralExpression.class));
-                    for (PsiElement ymlFile : ymlPsiElements) {
-                        inlayModel.addInlineElement(element.getTextOffset() + element.getTextLength(), new HintRenderer(getEnv(ymlFile.getContainingFile().getName()) + " : " + ymlFile.getLastChild().getText()));
-                    }
+            try {
+                PsiFile psiFile = PsiUtilCore.getPsiFile(project, file);
+                if (psiFile == null) {
+                    return;
                 }
-            });
+                if (!(psiFile.getFileType() instanceof JavaFileType)) {
+                    return;
+                }
+
+                Collection<PsiAnnotation> psiElements = PsiTreeUtil.findChildrenOfAnyType(psiFile, PsiAnnotation.class);
+                if (CollectionUtils.isEmpty(psiElements)) {
+                    return;
+                }
+                InlayModel inlayModel = editor.getInlayModel();
+                if (Objects.isNull(inlayModel)) {
+                    return;
+                }
+                psiElements.forEach(element -> {
+                    if (AppSettingsState.getInstance().ANNOTATIONS.contains(element.getQualifiedName())) {
+                        TextRange textRange = element.getTextRange();
+                        inlayModel.getInlineElementsInRange(textRange.getStartOffset(), textRange.getEndOffset(), HintRenderer.class).forEach(Inlay::dispose);
+                        @NotNull PsiElement[] ymlPsiElements = GotoYmlFile.getYmlPsiElements(PsiTreeUtil.findChildOfType(element, PsiLiteralExpression.class));
+                        for (PsiElement ymlFile : ymlPsiElements) {
+                            inlayModel.addInlineElement(element.getTextOffset() + element.getTextLength(), new HintRenderer(getEnv(ymlFile.getContainingFile().getName()) + " : " + ymlFile.getLastChild().getText()));
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                LOG.error(e);
+            }
         });
     }
 }

@@ -38,7 +38,7 @@
           </component>
         </children>
       </grid>
-      <grid id="4f91b" binding="donatePanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="4f91b" binding="donatePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false">
@@ -48,36 +48,13 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="f55b" class="javax.swing.JLabel" binding="donateLabel">
+          <component id="c8403" class="javax.swing.JButton" binding="donateBtn">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <icon value="icons/support.svg"/>
               <text value="捐赠/donate"/>
-            </properties>
-          </component>
-          <component id="15d25" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="205" height="205"/>
-              </grid>
-            </constraints>
-            <properties>
-              <icon value="icons/wechat.png"/>
-              <text value=""/>
-            </properties>
-          </component>
-          <component id="a3b7f" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="205" height="205"/>
-              </grid>
-            </constraints>
-            <properties>
-              <horizontalAlignment value="0"/>
-              <icon value="icons/alipay.png"/>
-              <text value=""/>
-              <verticalAlignment value="1"/>
             </properties>
           </component>
         </children>
