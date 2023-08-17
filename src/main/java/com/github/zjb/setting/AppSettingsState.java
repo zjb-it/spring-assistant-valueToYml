@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @State(
-        name = "org.intellij.sdk.settings.AppSettingsState",
+        name = "com.github.zjb.setting.AppSettingsState",
         storages = @Storage("ValueToYmlSettingsPlugin.xml")
 )
 public class AppSettingsState implements PersistentStateComponent<AppSettingsState> {
